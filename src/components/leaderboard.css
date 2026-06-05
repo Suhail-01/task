@@ -1,0 +1,203 @@
+:root {
+  --bg: transparent;
+  --fg: #fff;
+  --card-1: #2a2a3e;
+  --card-2: #1a1a2e;
+  --card-3: #1e1e30;
+}
+
+.sticky {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: transparent;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  isolation: isolate;
+  padding-top: 6vh;
+}
+
+.sticky::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(180, 0, 0, 0.12) 0%, rgba(0,0,0,0) 55%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.sticky-header {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.sticky-header h1 {
+  color: var(--fg);
+  font-size: clamp(2.5rem, 4vw, 4.8rem);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  text-align: center;
+  will-change: transform, opacity;
+}
+
+.image-stage {
+  position: relative;
+  width: 72vw;
+  aspect-ratio: 15 / 7;
+  will-change: width;
+  z-index: 5;
+}
+
+.full-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 1;
+}
+
+.card-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  gap: 0;
+  z-index: 5;
+  perspective: 1400px;
+  will-change: gap, opacity;
+}
+
+/* ── THE BUG FIX: card-front & card-back need position:absolute ── */
+.card {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  border-radius: 0;
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  will-change: transform, border-radius;
+}
+
+.card-front,
+.card-back {
+  position: absolute;        /* ← was missing, causing overlap */
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.card-front {
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 1rem 0.75rem;
+  text-align: center;
+}
+
+/* Card back colors — dark gradient style like original */
+.card:nth-child(1) .card-back {
+  background: linear-gradient(160deg, #1c1c2e 0%, #2a2a3e 100%);
+  border-top: 2px solid #C0C0C0;
+}
+.card:nth-child(2) .card-back {
+  background: linear-gradient(160deg, #1a1a2e 0%, #0d0d1a 100%);
+  border-top: 2px solid #FFD700;
+}
+.card:nth-child(3) .card-back {
+  background: linear-gradient(160deg, #1e1e30 0%, #141420 100%);
+  border-top: 2px solid #CD7F32;
+}
+
+/* Trophy row */
+.cb-trophy {
+  font-size: clamp(0.7rem, 1.1vw, 1rem);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  margin-bottom: 4px;
+}
+
+/* Avatar circle */
+.cb-avatar {
+  width: clamp(50px, 6vw, 72px);
+  height: clamp(50px, 6vw, 72px);
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(255,255,255,0.25);
+  margin: 2px 0 4px;
+}
+
+.cb-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* Player name */
+.cb-name {
+  font-size: clamp(0.75rem, 1.2vw, 1.1rem);
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.01em;
+}
+
+/* Opened */
+.cb-opened {
+  font-size: clamp(0.65rem, 1vw, 0.9rem);
+  color: #FFD700;
+  font-weight: 500;
+}
+
+/* Prize label */
+.cb-prize-label {
+  font-size: clamp(0.6rem, 0.9vw, 0.85rem);
+  color: rgba(255,255,255,0.6);
+  margin-top: 4px;
+}
+
+/* Prize button */
+.cb-prize-btn {
+  font-size: clamp(0.75rem, 1.1vw, 1rem);
+  font-weight: 700;
+  color: #000;
+  padding: 4px 16px;
+  border-radius: 6px;
+  margin-top: 2px;
+  letter-spacing: 0.02em;
+}
+
+/* Image slices */
+.slice {
+  width: 300%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  display: block;
+}
+
+.slice-left   { transform: translateX(0%); }
+.slice-center { transform: translateX(-33.3333%); }
+.slice-right  { transform: translateX(-66.6666%); }

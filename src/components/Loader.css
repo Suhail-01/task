@@ -1,0 +1,83 @@
+:root {
+  --base-100: #fff;
+  --base-200: #d1d9b8;
+  --base-300: #0f0f0f;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+/* ── CRITICAL FIX: was global, now scoped to .loader only ── */
+.loader img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--base-200);
+  color: var(--base-300);
+  will-change: opacity;
+  z-index: 9999;
+  pointer-events: auto;
+}
+
+.loader.fading {
+  pointer-events: none;
+}
+
+.loader .counter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loader .counter p {
+  font-size: 4rem;
+  font-weight: 500;
+  color: var(--base-300);
+}
+
+.loader svg {
+  width: 85%;
+  height: 85%;
+}
+
+.loader svg path {
+  fill: none;
+}
+
+.loader svg .orbit-text {
+  fill: var(--base-300);
+  text-transform: uppercase;
+  font-size: 2.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05rem;
+}
+
+@media (max-width: 1000px) {
+  .loader svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .loader svg .orbit-text {
+    font-size: 3rem;
+  }
+}

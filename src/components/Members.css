@@ -1,0 +1,419 @@
+/* ═══════════════════════════════════════
+   MEMBERS — Premium Leaderboard Section
+   ═══════════════════════════════════════ */
+
+.members {
+  position: relative;
+  width: 100%;
+  background: #0a0a0a;
+  padding: 0 0 120px;
+  overflow: hidden;
+}
+
+/* Seamless top fade from hero */
+.members::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, #0a0a0a);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Subtle radial atmosphere */
+.members::after {
+  content: "";
+  position: absolute;
+  top: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 600px;
+  background: radial-gradient(ellipse at center,
+    rgba(255, 193, 7, 0.04) 0%,
+    rgba(99, 102, 241, 0.03) 40%,
+    transparent 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ════════════════════════════
+   COUNTDOWN TIMER
+   ════════════════════════════ */
+
+.mem-timer-wrap {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 0 70px;
+  gap: 20px;
+}
+
+.mem-timer-label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.mem-timer {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.mem-timer-block {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.mem-timer-digit {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(255, 193, 7, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.mem-digit-top {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 38px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  position: relative;
+  z-index: 2;
+}
+
+/* Subtle center fold line */
+.mem-digit-fold {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 3;
+}
+
+.mem-digit-bot { display: none; }
+
+.mem-timer-unit {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.mem-timer-sep {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: rgba(255, 193, 7, 0.5);
+  margin-top: 22px;
+  align-self: flex-start;
+  line-height: 1;
+  animation: sep-blink 1s ease infinite;
+}
+
+@keyframes sep-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
+}
+
+/* Last digit (seconds) — golden glow */
+.mem-timer-block:last-child .mem-timer-digit {
+  border-color: rgba(255, 193, 7, 0.2);
+  box-shadow:
+    0 0 0 1px rgba(255, 193, 7, 0.1),
+    0 0 20px rgba(255, 193, 7, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.mem-timer-block:last-child .mem-digit-top {
+  color: #FFD700;
+}
+
+/* ════════════════════════════
+   TABLE
+   ════════════════════════════ */
+
+.mem-table-wrap {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Column layout */
+.mem-header,
+.mem-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 200px 160px;
+  align-items: center;
+  gap: 0;
+}
+
+/* ── HEADER ── */
+.mem-header {
+  padding: 0 24px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: 8px;
+}
+
+.mem-header span {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.mem-header .mem-col-opened,
+.mem-header .mem-col-prize {
+  text-align: right;
+}
+
+/* ── ROWS ── */
+.mem-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mem-row {
+  position: relative;
+  padding: 14px 24px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: default;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+  overflow: hidden;
+}
+
+.mem-row:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 193, 7, 0.15);
+  transform: translateX(4px);
+}
+
+/* alternating subtle tint */
+.mem-row:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.018);
+}
+
+/* Hover glow sweep */
+.mem-row-glow {
+  position: absolute;
+  left: -100%;
+  top: 0;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent,
+    rgba(255, 193, 7, 0.04),
+    transparent);
+  transition: left 0.4s ease;
+  pointer-events: none;
+}
+
+.mem-row:hover .mem-row-glow {
+  left: 120%;
+}
+
+/* ── RANK ── */
+.mem-col-rank {
+  display: flex;
+  align-items: center;
+}
+
+.mem-rank-badge {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.02em;
+}
+
+.mem-rank-badge sup {
+  font-size: 8px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  vertical-align: super;
+}
+
+/* Top 5 ranks get brighter */
+.mem-row:nth-child(1) .mem-rank-badge { color: #FFD700; }
+.mem-row:nth-child(2) .mem-rank-badge { color: #C0C0C0; }
+.mem-row:nth-child(3) .mem-rank-badge { color: #CD7F32; }
+.mem-row:nth-child(4) .mem-rank-badge { color: rgba(255,255,255,0.65); }
+.mem-row:nth-child(5) .mem-rank-badge { color: rgba(255,255,255,0.6); }
+
+/* ── PLAYER ── */
+.mem-col-player {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Avatar with image */
+.mem-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid rgba(99,102,241,0.35);
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.mem-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.mem-row:hover /* Avatar with image */
+.mem-avatar {
+  border-color: rgba(255, 193, 7, 0.4);
+  box-shadow: 0 0 10px rgba(255, 193, 7, 0.15);
+}
+
+/* Top 3 avatars */
+.mem-row:nth-child(1) /* Avatar with image */
+.mem-avatar { background: linear-gradient(135deg, rgba(255,215,0,0.25), rgba(255,165,0,0.15)); border-color: rgba(255,215,0,0.4); }
+.mem-row:nth-child(2) /* Avatar with image */
+.mem-avatar { background: linear-gradient(135deg, rgba(192,192,192,0.25), rgba(160,160,160,0.15)); border-color: rgba(192,192,192,0.3); }
+.mem-row:nth-child(3) /* Avatar with image */
+.mem-avatar { background: linear-gradient(135deg, rgba(205,127,50,0.25), rgba(180,100,30,0.15)); border-color: rgba(205,127,50,0.3); }
+
+.mem-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.03em;
+  transition: color 0.2s;
+}
+
+.mem-row:hover .mem-name {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* ── OPENED ── */
+.mem-col-opened {
+  text-align: right;
+}
+
+.mem-opened {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.02em;
+}
+
+/* ── PRIZE ── */
+.mem-col-prize {
+  text-align: right;
+}
+
+.mem-prize {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: filter 0.2s;
+}
+
+.mem-row:hover .mem-prize {
+  filter: brightness(1.2);
+}
+
+/* Left accent bar — top 5 */
+.mem-row:nth-child(1)::before,
+.mem-row:nth-child(2)::before,
+.mem-row:nth-child(3)::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: 10px 0 0 10px;
+}
+
+.mem-row:nth-child(1)::before { background: linear-gradient(to bottom, #FFD700, #FF8C00); }
+.mem-row:nth-child(2)::before { background: linear-gradient(to bottom, #C0C0C0, #888); }
+.mem-row:nth-child(3)::before { background: linear-gradient(to bottom, #CD7F32, #8B4513); }
+
+/* ════════════════════════════
+   RESPONSIVE
+   ════════════════════════════ */
+
+@media (max-width: 700px) {
+  .mem-header,
+  .mem-row {
+    grid-template-columns: 55px 1fr 120px;
+  }
+
+  .mem-col-opened,
+  .mem-header .mem-col-opened {
+    display: none;
+  }
+
+  .mem-timer-digit {
+    width: 68px;
+    height: 68px;
+  }
+
+  .mem-digit-top {
+    font-size: 28px;
+  }
+
+  .mem-timer-sep {
+    font-size: 24px;
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mem-table-wrap {
+    padding: 0 10px;
+  }
+
+  .mem-row {
+    padding: 12px 14px;
+  }
+
+  .mem-name {
+    font-size: 10px;
+  }
+}

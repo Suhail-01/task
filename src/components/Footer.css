@@ -1,0 +1,336 @@
+/* ═══════════════════════════════
+   FOOTER — Premium Gaming Dark
+   ═══════════════════════════════ */
+.footer {
+  position: relative;
+  width: 100%;
+  background: #0a0a0a;
+  font-family: 'Orbitron', sans-serif;
+  overflow: hidden;
+}
+
+/* Physics zone at top of footer */
+.footer-physics-zone {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  pointer-events: auto;
+  z-index: 2;
+}
+
+/* Fade effect to blend physics zone into footer */
+.footer-physics-zone::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, #0a0a0a);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Divider line */
+.footer-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.08) 20%,
+    rgba(255, 193, 7, 0.15) 50%,
+    rgba(255, 255, 255, 0.08) 80%,
+    transparent
+  );
+  margin-bottom: 0;
+}
+
+/* Inner wrapper */
+.footer-inner {
+  position: relative;
+  z-index: 4;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 48px 40px 32px;
+}
+
+/* ── TOP ROW ── */
+.footer-top {
+  display: flex;
+  gap: 60px;
+  margin-bottom: 40px;
+  align-items: flex-start;
+}
+
+/* Brand */
+.footer-brand {
+  flex-shrink: 0;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.footer-logo-icon {
+  font-size: 22px;
+  color: #FFD700;
+  filter: drop-shadow(0 0 8px rgba(255,215,0,0.4));
+}
+
+.footer-logo-text {
+  font-size: 18px;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+.footer-logo-text b {
+  font-weight: 700;
+  color: #FFD700;
+}
+
+.footer-assist {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.footer-email {
+  display: block;
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  font-family: 'Orbitron', sans-serif;
+  transition: color 0.2s;
+}
+
+.footer-email:hover {
+  color: rgba(255, 193, 7, 0.8);
+}
+
+/* Link columns */
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  flex: 1;
+}
+
+.footer-col-title {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 16px;
+}
+
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-link {
+  font-size: 11px;
+  color: rgba(255,255,255,0.38);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.footer-link:hover {
+  color: rgba(255,255,255,0.75);
+}
+
+/* ── SEO ROW ── */
+.footer-seo {
+  padding: 20px 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  margin-bottom: 28px;
+  line-height: 2;
+}
+
+.footer-seo-link {
+  font-size: 9px;
+  color: rgba(255,255,255,0.25);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  font-family: 'Orbitron', sans-serif;
+  transition: color 0.2s;
+}
+
+.footer-seo-link:hover {
+  color: rgba(255,255,255,0.5);
+}
+
+.footer-seo-sep {
+  color: rgba(255,255,255,0.12);
+  font-size: 9px;
+}
+
+/* ── BOTTOM BAR ── */
+.footer-bottom {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.footer-bottom-left {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-copy {
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+.footer-legal-text {
+  font-size: 9px;
+  color: rgba(255,255,255,0.2);
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+  max-width: 600px;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.footer-bottom-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+/* Social icons */
+.footer-socials {
+  display: flex;
+  gap: 6px;
+}
+
+.footer-social-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  text-decoration: none;
+  color: rgba(255,255,255,0.5);
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.footer-social-btn:hover {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  border-color: rgba(255,255,255,0.18);
+}
+
+/* Payments */
+.footer-payments {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.footer-payment-badge {
+  font-size: 9px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.45);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px;
+  padding: 3px 7px;
+  letter-spacing: 0.04em;
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* Currency */
+.footer-currency {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  color: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  padding: 5px 10px;
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  transition: background 0.2s;
+}
+
+.footer-currency:hover {
+  background: rgba(255,255,255,0.09);
+}
+
+/* Version */
+.footer-version {
+  font-size: 9px;
+  color: rgba(255,255,255,0.15);
+  text-align: right;
+  margin-top: 20px;
+  letter-spacing: 0.08em;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .footer-top {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .footer-links {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-inner {
+    padding: 32px 20px 24px;
+  }
+
+  .footer-links {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-bottom-right {
+    justify-content: flex-start;
+  }
+
+  .footer-physics-zone {
+    height: 180px;
+  }
+}
