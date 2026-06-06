@@ -37,7 +37,15 @@ body {
   color: white;
   overflow-x: hidden;
 }
+body.loader-active {
+  overflow: hidden;
+  touch-action: none;
+}
 
+body.loader-done {
+  overflow: auto;
+  touch-action: auto;
+}
 body::-webkit-scrollbar {
   width: 8px;
 }

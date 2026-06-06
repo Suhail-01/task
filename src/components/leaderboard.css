@@ -201,3 +201,58 @@
 .slice-left   { transform: translateX(0%); }
 .slice-center { transform: translateX(-33.3333%); }
 .slice-right  { transform: translateX(-66.6666%); }
+@media (max-width: 768px) {
+  .sticky-header {
+    white-space: normal;
+    width: 90vw;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .sticky-header h1 {
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
+    line-height: 1.15;
+    text-align: center;
+  }
+
+  /* Card back content — small & centered for mobile */
+  .card-back {
+    gap: 3px;
+    padding: 0.4rem 0.3rem;
+  }
+
+ .cb-avatar {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 1px 0 2px;
+  flex-shrink: 0;
+}
+
+  .cb-trophy {
+  font-size: 0.38rem;
+  margin-bottom: 1px;
+}
+
+.cb-name {
+  font-size: 0.36rem;
+}
+
+.cb-opened {
+  font-size: 0.34rem;
+}
+
+.cb-prize-label {
+  font-size: 0.32rem;
+  margin-top: 1px;
+}
+
+.cb-prize-btn {
+  font-size: 0.34rem;
+  padding: 1px 4px;
+  margin-top: 1px;
+}
+}

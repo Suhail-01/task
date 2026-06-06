@@ -35,10 +35,12 @@ body {
   will-change: opacity;
   z-index: 9999;
   pointer-events: auto;
+  touch-action: none;
 }
 
 .loader.fading {
   pointer-events: none;
+  touch-action: none;
 }
 
 .loader .counter {

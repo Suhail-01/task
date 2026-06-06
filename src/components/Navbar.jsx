@@ -5,17 +5,18 @@ import { gsap } from "gsap";
 export default function Navbar() {
   const [visible, setVisible] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [time, setTime] = useState({ d: "02", h: "22", m: "52", s: "32" });
   const navRef = useRef(null);
 
-  // Show navbar after scroll
+  // Show navbar after scroll — UNCHANGED
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 60);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Live countdown ticker
+  // Live countdown ticker — UNCHANGED
   useEffect(() => {
     const tick = setInterval(() => {
       setTime((prev) => {
@@ -35,18 +36,16 @@ export default function Navbar() {
     return () => clearInterval(tick);
   }, []);
 
-  // GSAP Animations (mobile-first)
+  // GSAP Animations — UNCHANGED
   useEffect(() => {
     const mm = gsap.matchMedia();
 
     mm.add({
       "(max-width: 768px)": () => {
-        // Mobile animation
         gsap.to(".nb-logo", { y: 4, opacity: 1, duration: 0.6 });
         gsap.to(".nb-btn--signup", { scale: 1.03, duration: 0.8 });
       },
       "(min-width: 769px)": () => {
-        // Desktop animation
         gsap.from(".nb-links a", {
           x: -20,
           opacity: 0,
@@ -71,7 +70,7 @@ export default function Navbar() {
     >
       <div className="nb-glass" />
 
-      {/* MICRO BAR */}
+      {/* MICRO BAR — UNCHANGED */}
       <div className="nb-micro">
         <div className="nb-micro-left">
           <span className="nb-tag">FAQ</span>
@@ -91,9 +90,9 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* MAIN BAR */}
+      {/* MAIN BAR — UNCHANGED */}
       <div className="nb-main">
-        {/* LEFT */}
+        {/* LEFT — UNCHANGED */}
         <div className="nb-left">
           <div className="nb-logo">
             <span className="nb-logo-icon">◆</span>
@@ -116,7 +115,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* CENTER */}
+        {/* CENTER — UNCHANGED */}
         <div className="nb-center">
           <div className="nb-race">
             <div className="nb-race-icon">🏆</div>
@@ -151,7 +150,7 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* RIGHT */}
+        {/* RIGHT — hamburger added, rest unchanged */}
         <div className="nb-right">
           <div className="nb-raffle-banner">
             <div className="nb-rb-inner">
@@ -168,10 +167,30 @@ export default function Navbar() {
             <span className="nb-btn-label">Sign Up</span>
           </a>
           <a className="nb-btn nb-btn--login" href="#">Login</a>
+
+          {/* HAMBURGER — mobile only */}
+          <button
+            className="nb-hamburger"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
+            <span className={`nb-ham-line ${menuOpen ? "nb-ham-line--open" : ""}`} />
+            <span className={`nb-ham-line ${menuOpen ? "nb-ham-line--open" : ""}`} />
+            <span className={`nb-ham-line ${menuOpen ? "nb-ham-line--open" : ""}`} />
+          </button>
         </div>
       </div>
 
-      {/* HINT BAR */}
+      {/* MOBILE SLIDE-DOWN MENU */}
+      <div className={`nb-mobile-menu ${menuOpen ? "nb-mobile-menu--open" : ""}`}>
+        <a className="nb-mobile-link" href="#" onClick={() => setMenuOpen(false)}>🏠 Home</a>
+        <a className="nb-mobile-link" href="#" onClick={() => setMenuOpen(false)}>✦ Games</a>
+        <a className="nb-mobile-link" href="#" onClick={() => setMenuOpen(false)}>🚀 Challenges</a>
+        <a className="nb-mobile-link" href="#" onClick={() => setMenuOpen(false)}>🏆 Rewards</a>
+        <a className="nb-mobile-link" href="#" onClick={() => setMenuOpen(false)}>💬 Support</a>
+      </div>
+
+      {/* HINT BAR — UNCHANGED */}
       <div className="nb-hint">
         <span className="nb-hint-pill">🏆 €50,000 Race</span>
         <span className="nb-hint-dot" />

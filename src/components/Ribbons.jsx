@@ -140,27 +140,53 @@ const Ribbons = ({
 
     resize();
 
-    const mouse = new Vec3();
+    const mouse = new Vec3(-10, -10, 0);
+    lines.forEach(line => line.points.forEach(p => p.set(-10, -10, 0)));
 
-    function updateMouse(e) {
-      let x, y;
+    let isTouchDevice = false;
+    let touchSuppressTimer = null;
+
+    function updateMouse(x, y) {
       const rect = container.getBoundingClientRect();
-      if (e.changedTouches && e.changedTouches.length) {
-        x = e.changedTouches[0].clientX - rect.left;
-        y = e.changedTouches[0].clientY - rect.top;
-      } else {
-        x = e.clientX - rect.left;
-        y = e.clientY - rect.top;
-      }
       const width  = container.clientWidth;
       const height = container.clientHeight;
-      mouse.set((x / width) * 2 - 1, (y / height) * -2 + 1, 0);
+      mouse.set(
+        ((x - rect.left) / width)  *  2 - 1,
+        ((y - rect.top)  / height) * -2 + 1,
+        0
+      );
     }
 
-    // Use window for mouse — so trail works across entire page
-    window.addEventListener('mousemove', updateMouse);
-    container.addEventListener('touchstart', updateMouse);
-    container.addEventListener('touchmove', updateMouse);
+    function onMouseMove(e) {
+      if (isTouchDevice) return;
+      updateMouse(e.clientX, e.clientY);
+    }
+
+    function onTouchStart(e) {
+      isTouchDevice = true;
+      if (touchSuppressTimer) clearTimeout(touchSuppressTimer);
+      const touch = e.touches[0];
+      if (touch) updateMouse(touch.clientX, touch.clientY);
+    }
+
+    // FIX: removed e.preventDefault() — was blocking mobile scroll
+    function onTouchMove(e) {
+      isTouchDevice = true;
+      const touch = e.touches[0];
+      if (touch) updateMouse(touch.clientX, touch.clientY);
+    }
+
+    function onTouchEnd() {
+      if (touchSuppressTimer) clearTimeout(touchSuppressTimer);
+      touchSuppressTimer = setTimeout(() => {
+        isTouchDevice = false;
+      }, 600);
+    }
+
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchmove',  onTouchMove,  { passive: true }); // FIX: passive true
+    window.addEventListener('touchend',   onTouchEnd,   { passive: true });
 
     const tmp = new Vec3();
     let frameId;
@@ -199,9 +225,11 @@ const Ribbons = ({
 
     return () => {
       window.removeEventListener('resize', resize);
-      window.removeEventListener('mousemove', updateMouse);
-      container.removeEventListener('touchstart', updateMouse);
-      container.removeEventListener('touchmove', updateMouse);
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchmove',  onTouchMove);
+      window.removeEventListener('touchend',   onTouchEnd);
+      if (touchSuppressTimer) clearTimeout(touchSuppressTimer);
       cancelAnimationFrame(frameId);
       if (gl.canvas && gl.canvas.parentNode === container) {
         container.removeChild(gl.canvas);
